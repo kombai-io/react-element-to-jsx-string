@@ -19,10 +19,6 @@ export default (
 
   const stringifiedValue = prettyPrint(normalizedValue, {
     transform: (currentObj, prop, originalResult) => {
-      if (isValidElement(currentObj)) {
-        return '<ELEMENT>';
-      }
-
       const currentValue = currentObj[prop];
 
       if (currentValue && isValidElement(currentValue)) {
@@ -38,7 +34,7 @@ export default (
         return formatFunction(currentValue, options);
       }
 
-      return originalResult;
+      return originalResult();
     },
   });
 

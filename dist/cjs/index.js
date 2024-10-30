@@ -259,9 +259,6 @@ var formatComplexDataStructure = (function (value, inline, lvl, options) {
   var normalizedValue = sortObject(value);
   var stringifiedValue = prettyPrintObject.prettyPrint(normalizedValue, {
     transform: function transform(currentObj, prop, originalResult) {
-      if ( /*#__PURE__*/React.isValidElement(currentObj)) {
-        return '<ELEMENT>';
-      }
       var currentValue = currentObj[prop];
       if (currentValue && /*#__PURE__*/React.isValidElement(currentValue)) {
         return formatTreeNode(parseReactElement(currentValue, options), true, lvl, options);
@@ -269,7 +266,7 @@ var formatComplexDataStructure = (function (value, inline, lvl, options) {
       if (typeof currentValue === 'function') {
         return formatFunction(currentValue, options);
       }
-      return originalResult;
+      return originalResult();
     }
   });
   if (inline) {
