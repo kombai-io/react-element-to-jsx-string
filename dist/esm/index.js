@@ -592,7 +592,7 @@ var reactElementToJsxString = function reactElementToJsxString(element) {
     displayName: displayName
   };
   if (! /*#__PURE__*/isValidElement(element)) {
-    return formatComplexDataStructure(element, true, 0, options);
+    return formatComplexDataStructure(element, false, 0, options);
   }
 
   // if (!element) {
