@@ -579,9 +579,6 @@ var reactElementToJsxString = function reactElementToJsxString(element) {
     sortProps = _ref$sortProps === void 0 ? true : _ref$sortProps,
     maxInlineAttributesLineLength = _ref.maxInlineAttributesLineLength,
     displayName = _ref.displayName;
-  if (!element) {
-    throw new Error('react-element-to-jsx-string: Expected a ReactElement');
-  }
   var options = {
     filterProps: filterProps,
     showDefaultProps: showDefaultProps,
@@ -594,6 +591,10 @@ var reactElementToJsxString = function reactElementToJsxString(element) {
     maxInlineAttributesLineLength: maxInlineAttributesLineLength,
     displayName: displayName
   };
+  if (!element) {
+    return formatComplexDataStructure(element, false, 0, options);
+    // throw new Error('react-element-to-jsx-string: Expected a ReactElement');
+  }
   return formatTree(parseReactElement(element, options), options);
 };
 
