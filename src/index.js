@@ -2,6 +2,7 @@
 
 import formatTree from './formatter/formatTree';
 import parseReactElement from './parser/parseReactElement';
+import { isValidElement } from 'react';
 import type { Element as ReactElement } from 'react';
 import type { Options } from './options';
 import formatComplexDataStructure from './formatter/formatComplexDataStructure';
@@ -34,10 +35,13 @@ const reactElementToJsxString = (
     displayName,
   };
 
-  if (!element) {
-    return formatComplexDataStructure(element, false, 0, options);
-    // throw new Error('react-element-to-jsx-string: Expected a ReactElement');
+  if (!isValidElement(element)) {
+    return formatComplexDataStructure(element, true, 0, options);
   }
+
+  // if (!element) {
+  // throw new Error('react-element-to-jsx-string: Expected a ReactElement');
+  // }
 
   return formatTree(parseReactElement(element, options), options);
 };

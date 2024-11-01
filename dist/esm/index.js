@@ -591,10 +591,14 @@ var reactElementToJsxString = function reactElementToJsxString(element) {
     maxInlineAttributesLineLength: maxInlineAttributesLineLength,
     displayName: displayName
   };
-  if (!element) {
-    return formatComplexDataStructure(element, false, 0, options);
-    // throw new Error('react-element-to-jsx-string: Expected a ReactElement');
+  if (! /*#__PURE__*/isValidElement(element)) {
+    return formatComplexDataStructure(element, true, 0, options);
   }
+
+  // if (!element) {
+  // throw new Error('react-element-to-jsx-string: Expected a ReactElement');
+  // }
+
   return formatTree(parseReactElement(element, options), options);
 };
 
